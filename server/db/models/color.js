@@ -17,6 +17,13 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [2, 20],
+        isNotLastY(value) {
+          if (value.endsWith('y')) throw new Error("name must not end in 'y'")
+        }
+      }
+
     }
   }, {
     sequelize,
